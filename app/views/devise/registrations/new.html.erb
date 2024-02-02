@@ -4,8 +4,23 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mobile_no %><br />
+    <%= f.text_field :mobile_no, autofocus: true %>
+  </div>
+
+  <div>
+    <%= f.label :user_type, style: "display: block" %>
+    <%= f.select :user_type, User.user_types.keys.map { |user_type| [user_type.humanize, user_type] }, { prompt: 'Please select' }, class: 'form-control' %>
   </div>
 
   <div class="field">

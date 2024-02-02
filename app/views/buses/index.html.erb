@@ -1,11 +1,13 @@
+
+
 <p style="color: green"><%= notice %></p>
+<%= if_bus_owner? %>
 
 <h1>Buses</h1>
 <% if user_signed_in? %>
-  <% if is_bus_owner? %>
-    <%= link_to "New bus", new_bus_path %>
-  <% end %>
+<%= link_to "New bus", new_bus_path %>
 <% end %>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <div class="section_our_solution">

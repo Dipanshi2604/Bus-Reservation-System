@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  total_seats: 1
+  source: MyString
+  destination: MyString
+  arrival_time: 2024-01-25 16:57:38
+  departure_time: 2024-01-25 16:57:38
+  registration_no: 1
+  bus_owner: one
+
+two:
+  title: MyString
+  total_seats: 1
+  source: MyString
+  destination: MyString
+  arrival_time: 2024-01-25 16:57:38
+  departure_time: 2024-01-25 16:57:38
+  registration_no: 1
+  bus_owner: two

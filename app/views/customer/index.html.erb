@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>My Booking</h1>
+
+<div id="buses">
+  <% @my_bookings.each do |booking| %>
+    <strong>
+      <%= booking.bus.title %>
+    </strong>
+    <p> <%= "#{booking.bus.source} to #{booking.bus.destination}" %>
+    <span class="right-align"> <%= booking.bus.arrival_time %> </span><br>
+    <span class="right-align">
+      <%= link_to "Cancel", bus_reservation_path(booking.bus, booking),
+      method: :post,
+      data: { confirm: "Are you sure?", turbo_method: :delete },
+      class: "your-custom-class" %>
+    </span>
+    <strong> <%= "Seat no: #{booking.seat.seat_no}"%> </strong>
+    <hr>
+  <% end %>
+  <hr>
+</div>

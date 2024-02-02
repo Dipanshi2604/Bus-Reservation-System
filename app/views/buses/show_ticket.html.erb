@@ -1,0 +1,20 @@
+<%= form_with(model: @bus, url: bus_reservations_path(@bus), method: :post) do |form| %>
+  <%= form.hidden_field :reservation_date, value: params[:reservation_date] %>
+
+  <div class="seat-grid-container">
+    <% @bus_seats.each do |seat| %>
+      <% reserved_class = @reservation_seats.include?(seat.id) ? "reserved" : "available" %>
+      <div class="seat <%= reserved_class %>">
+        <% options = { multiple: true } %>
+        <% options[:disabled] = true if @reservation_seats.include?(seat.id) %>
+        <%= check_box_tag "seat_ids[]", seat.id, @reservation_seats.include?(seat.id), options %>
+        <label for="seat_ids_<%= seat.id %>"><%= seat.seat_no %></label>
+      </div>
+    <% end %>
+  </div>
+
+  <%= submit_tag "Submit" %>
+<% end %>
+
+
+

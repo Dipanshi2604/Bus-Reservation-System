@@ -1,0 +1,7 @@
+<%= form_tag(bus_reservations_path(@bus), method: :post) do %>
+  <div>
+    <%= label_tag "reservation_date", "Reservation Date" %>
+    <%= date_field_tag "reservation_date", nil, class: "datepicker" %>
+  </div>
+  <%= submit_tag "Submit" %>
+<% end %>

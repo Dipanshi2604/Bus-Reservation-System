@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @bus %>
+
+<div>
+  <%= link_to "Book Ticket", booking_bus_path(@bus) %>
+  <% if is_bus_owner? %>
+    <%= link_to "Edit this bus", edit_bus_path(@bus) %>
+  <% end %>
+  <%= link_to "Back to buses", buses_path %>
+
+  <%= button_to "Destroy this bus", @bus, method: :delete %>
+</div>

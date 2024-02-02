@@ -1,0 +1,14 @@
+
+<div class="seat-grid">
+  <% @bus_seats.each do |seat| %>
+    <% reserved_class = @reservation_seats.include?(seat.id) ? "reserved" : "available" %>
+    <%= check_box_tag "seat_#{seat.seat_no}", 1, false, class: "seat-checkbox #{reserved_class}" %>
+    <%= label_tag "seat_#{seat.seat_no}", "Seat #{seat.seat_no}", class: "seat-label" %>
+  <% end %>
+</div>
+# <% @bus.seats.each do |seat| %>
+#   <div>
+#     <%= check_box_tag "selected_seats[]", seat.id, false %>
+#     <%= label_tag "seat_#{seat.id}", "Seat #{seat.seat_no}" %>
+#   </div>
+# <% end %>

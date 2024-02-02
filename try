@@ -1,0 +1,50 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Buses</h1>
+
+<div id="buses">
+  <% @buses.each do |bus| %>
+    <%#=  render bus %>
+    <p>
+      <%= link_to bus.title, bus %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New bus", new_bus_path %>
+
+
+<div class="seat-grid">
+  <% @bus_seats.each do |seat| %>
+    <% reserved_class = @reservation_seats.include?(seat.id) ? "reserved" : "available" %>
+    <%= check_box_tag "seat_#{seat.seat_no}", 1, false, class: "seat-checkbox #{reserved_class}" %>
+    <%= label_tag "seat_#{seat.seat_no}", "Seat #{seat.seat_no}", class: "seat-label" %>
+  <% end %>
+</div>
+<%= form_tag(model: @bus, url: new_bus_reservation_path(@bus), method: 'post') do %>
+  <% @bus_seats.each do |seat| %>
+    <td><%= seat.seat_no %></td>
+    <%= check_box_tag "seat_ids[]", seat.id, @reservation_seats.include?(seat.id) %>
+  <% end %>
+
+
+  # <table>
+  #   <thead>
+  #     <tr>
+  #       <th>Seat Number</th>
+  #       <th>Reserved</th>
+  #     </tr>
+  #   </thead>
+  #   <tbody>
+  #     <% @bus_seats.each do |seat| %>
+  #       <tr>
+  #         <td><%= seat.seat_no %></td>
+  #         <td>
+  #           <%= check_box_tag "seat_ids[]", seat.id, @reservation_seats.include?(seat.id) %>
+  #         </td>
+  #       </tr>
+  #     <% end %>
+  #   </tbody>
+  # </table>
+  <%= submit_tag "Submit" %>
+<% end %>
