@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>BusReservation</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>BusReservation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-          <div class="container">
-              <%= link_to "HOME", root_path %>
-              <a class="navbar-brand" href="#">Bus Reservations</a>
-              <%= get_user_email %>
-              <%= get_sign_in_or_sign_out_link %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body style="background-color: #cfcfcfbd;">
+  <br>
+  <%= render 'home/header' %>
+  <br>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <% if notice.present? || alert.present? %>
+          <div class="text-center">
+            <% if notice.present? %>
+              <div class="alert alert-success" role="alert">
+                <%= notice %>
+              </div>
+            <% end %>
+            <% if alert.present? %>
+              <div class="alert alert-danger" role="alert">
+                <%= alert %>
+              </div>
+            <% end %>
           </div>
-      </nav>
-
-  <body>
-      <nav class="navbar navbar-expand-lg  bg-light fixed-top">
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item ">
-              <%= link_to "HOME", root_path, class:"nav-link" %>
-            </li>
-            <li class="nav-item ">
-              <p class:"nav-link"> <%= get_user_email%> </p>
-            </li>
-            <li class="nav-item ">
-              <%= get_sign_in_or_sign_out_link %>
-            </li>
-          </ul>
-        </div>
-        <%= form_with(url: buses_path, method: "get", local: true) do |form| %>
-          <%= form.text_field :search, placeholder: "Enter route or title" %>
-          <%= form.submit "Search" %>
         <% end %>
-      </nav>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
     <%= yield %>
-  </body>
+  </div>
+
+
+  
+
+  <script src="https://kit.fontawesome.com/31998d0ab6.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
 </html>

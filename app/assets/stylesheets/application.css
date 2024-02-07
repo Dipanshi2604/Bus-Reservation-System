@@ -13,21 +13,36 @@
  *= require_tree .
  *= require_self
  */
+ body{
+  background-color: #BFD7EA;
+  margin: 50px;
+ }
  .right-align{
     float: right 
  }
+ .align-center{
+  display: grid;
+  place-items: center;  
+ }
+ h2, h1 {
+  font-size: calc(1.375rem + 1.5vw);
+  display: grid;
+  place-items: center;
+}
  .button {
    display: inline-block;
-   padding: 10px 20px;
-   background-color: #603518; /* Button color */
-   color: white; /* Text color */
+   padding: 6px 8px;
+   background-color: #385166; /* Button color */
+   color: rgb(243, 238, 238); /* Text color */
    text-align: center;
-   text-decoration: none;
-   border: none; /* Remove default button border */
+   border: 2px solid black;
    border-radius: 5px; /* Rounded corners */
    cursor: pointer; /* Change cursor on hover */
  }
-
+ .button:hover{
+  color: white;
+  text-decoration: none;
+ }
 
 .bus-title {
   font-size: 18px;
@@ -35,24 +50,39 @@
   margin-bottom: 10px;
 }
 
-.details-btn {
-  background-color: #17a2b8; /* Button background color */
-  color: #fff; /* Button text color */
-  border: 1px solid #17a2b8; /* Button border color */
-  border-radius: 5px; /* Rounded corners */
-  padding: 5px 10px;
-  text-decoration: none;
-  display: inline-block;
+
+
+
+
+/* header navbar serch */
+.search-bar{
+  margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    outline: none;
+    background: transparent;
+    border: none;
+    border: 1px solid #FFC300;
+    color: white;
+    border-radius: 13px;
 }
-body {
-  margin: 50px; /* Margin for the entire page */
-  /* padding-top: 56px; */
+
+.search-bar::placeholder{
+  color: #FFC300!important;
+  padding-left: 20px;
+   background: transparent;
 }
 
-
-
-
-
+input[type="submit"] {
+  background-color:  #3f8721!important;
+  color: white;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 16px;
+  /* font-size: 0.8rem; */
+  cursor: pointer;
+}
 
 /* card css */
 .section_our_solution .row {
@@ -63,7 +93,9 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width:100%;
 }
+
 .our_solution_category .solution_cards_box {
   display: flex;
   flex-direction: column;
@@ -71,7 +103,7 @@ body {
 }
 .solution_cards_box .solution_card {
   flex: 0 50%;
-  background: #fff;
+  background: #e9d298a1;
   box-shadow: 0 2px 4px 0 rgba(136, 144, 195, 0.2),
     0 5px 15px 0 rgba(37, 44, 97, 0.15);
   border-radius: 15px;
@@ -82,11 +114,13 @@ body {
   overflow: hidden;
   min-height: 265px;
   transition: 0.7s;
+  width: 90%;
 }
 
 .solution_cards_box .solution_card:hover {
-  background: #309df0;
-  color: #fff;
+  /* background: #309df0; */
+   background: #f2b312a1;
+  color: #000000;
   transform: scale(1.1);
   z-index: 9;
 }
@@ -97,7 +131,7 @@ body {
 
 .solution_cards_box .solution_card:hover .solu_title h3,
 .solution_cards_box .solution_card:hover .solu_description p {
-  color: #fff;
+  color: #000000;
 }
 
 .solution_cards_box .solution_card:before {
@@ -219,7 +253,295 @@ body {
     top: -3rem;
   }
   .our_solution_category {
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
   }
 }
+
+
+
+
+/* checkbox */
+.seat-grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust the gap between seats as needed */
+}
+
+.seat {
+  width: 75px; /* Adjust the width of each seat */
+  height: 75px; /* Adjust the height of each seat */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.reserved {
+  background-color: #ecb2b2; /* Customize the background color for reserved seats */
+}
+
+.available {
+  background-color: #99dfff; /* Customize the background color for available seats */
+}
+.bus_container{
+  display: grid;
+  place-items: center;
+  margin: auto;
+  width: 150px;
+  margin-top: 80px;
+}
+.submit_tag{
+  margin-top: 10px;
+  display: grid;
+  place-items: center;
+}
+hr {
+  border-color: blue;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+.bus-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+a,
+button {
+  display: inline-block;
+  margin: 8px;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+p strong{
+  color: rgb(35, 57, 35);
+}
+.bt-primary {
+  color: #fff;
+  background-color: #2a7a1c;
+  border-color: #080b0e;
+}
+
+.btn-tertiary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-destructive {
+  background-color: rgb(196, 51, 51);
+  color: white;
+}
+
+/* date field */
+
+.reservation-form {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for form labels */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* Style for input fields */
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Style for the submit button */
+input[type="submit"] {
+  background-color: #38873b; /* Green color */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #3f7f42; /* Darker green color on hover */
+}
+
+/* flashes */
+
+
+
+/* booking */
+  .booking-entry {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  .booking-details {
+    float: left;
+    width: 60%;
+  }
+
+  .booking-actions {
+    float: right;
+    text-align: right;
+    width: 40%;
+  }
+
+  .your-custom-class {
+    /* Add your custom styles for the cancel button */
+    background-color: #d9534f;
+    color: #fff;
+    border: 1px solid #d43f3a;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 3px;
+  }
+
+
+  /* bus card */
+  .team-boxed {
+    color:#313437;
+    background-color:#eef4f7;
+  }
+  
+  .team-boxed p {
+    color:#7d8285;
+  }
+  
+  .team-boxed h2 {
+    font-weight:bold;
+    margin-bottom:40px;
+    padding-top:40px;
+    color:inherit;
+  }
+  
+  @media (max-width:767px) {
+    .team-boxed h2 {
+      margin-bottom:25px;
+      padding-top:25px;
+      font-size:24px;
+    }
+  }
+  
+  .team-boxed .intro {
+    font-size:16px;
+    max-width:500px;
+    margin:0 auto;
+  }
+  
+  .team-boxed .intro p {
+    margin-bottom:0;
+  }
+  
+  .team-boxed .people {
+    padding:50px 0;
+  }
+  
+  .team-boxed .item {
+    text-align:center;
+  }
+  
+  .team-boxed .item .box {
+    text-align:center;
+    padding:30px;
+    background-color:#fff;
+    margin-bottom:30px;
+  }
+  
+  .team-boxed .item .name {
+    font-weight:bold;
+    margin-top:28px;
+    margin-bottom:8px;
+    color:inherit;
+  }
+  
+  .team-boxed .item .title {
+    text-transform:uppercase;
+    font-weight:bold;
+    color:#d0d0d0;
+    letter-spacing:2px;
+    font-size:13px;
+  }
+  
+  .team-boxed .item .description {
+    font-size:15px;
+    margin-top:15px;
+    margin-bottom:20px;
+  }
+  
+  .team-boxed .item img {
+    max-width:160px;
+  }
+  
+  .team-boxed .social {
+    font-size:18px;
+    color:#a2a8ae;
+  }
+  
+  .team-boxed .social a {
+    color:inherit;
+    margin:0 10px;
+    display:inline-block;
+    opacity:0.7;
+  }
+  
+  .team-boxed .social a:hover {
+    opacity:1;
+  }
+
+  .details-btn {
+    background-color: #308d9f; /* Button background color */
+    color: #fff; /* Button text color */
+    border: 1px solid black; /* Button border color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .details-btn:hover{
+    color: rgb(39, 44, 53);
+    text-decoration: none;
+    background-color: #bbebf5;
+  }
+
+  .details-btn {
+    background-color:transparent;
+    border: 1px solid #a98611;
+    color: #c69d14;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  .details-btn:hover{
+    background-color: #c69d14;
+    color: black;
+  }

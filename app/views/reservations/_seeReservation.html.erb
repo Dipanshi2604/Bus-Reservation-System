@@ -1,0 +1,7 @@
+<div class="reservation-form">
+  <%= form_tag(bus_reservations_path(@bus), method: :get) do  %>
+    <%= label_tag "reservation_date", "Reservation Date:" %>
+    <%= date_field_tag "reservation_date", Date.today, required: true, min: Date.today %>
+    <%= submit_tag "See Reservation" %>
+  <% end %> 
+</div>

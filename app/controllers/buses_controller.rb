@@ -1,14 +1,10 @@
 class BusesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create book_ticket edit]
+  before_action :authenticate_user!, except: %i[show index]
   before_action :set_bus, only: %i[ show edit update destroy book_ticket show_ticket]
 
   # GET /buses or /buses.json
   def index
-    if params[:search].present?
-      @buses = Bus.where("source LIKE :search OR title LIKE :search OR destination LIKE :search", search: "%#{params[:search]}%")
-    else
-      @buses = Bus.all
-    end
+    @buses = Bus.all
   end
 
   def book_ticket
@@ -77,6 +73,14 @@ class BusesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to buses_url, notice: "Bus was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def search_bus
+    if params[:search].present?
+      @buses = Bus.where("source LIKE :search OR title LIKE :search OR destination LIKE :search", search: "%#{params[:search]}%")
+    else
+      @buses = Bus.all
     end
   end
 

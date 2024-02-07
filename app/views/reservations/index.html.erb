@@ -1,0 +1,28 @@
+<h2> Reservation for <%= @bus.title %> </h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Bus Name</th>
+      <th>Arrival</th>
+      <th>Destination</th>
+      <th>Seat no.</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bus_reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.user.name %></td>
+        <td><%= reservation.user.email %></td>
+        <td><%= reservation.bus.title %></td>
+        <td><%= reservation.bus.source %></td>
+        <td><%= reservation.bus.destination %></td>
+        <td><%= reservation.seat.seat_no %></td>
+        <td><%= reservation.reservation_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

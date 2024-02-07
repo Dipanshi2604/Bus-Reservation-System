@@ -1,23 +1,39 @@
 class ReservationsController < ApplicationController
   before_action :set_bus
+  before_action :authenticate_user!
   # before_action :set_reservation
+
+  def index
+    @bus = Bus.find(params[:bus_id])
+    @reservation_date = params[:reservation_date]
+    @bus_reservations = @bus.reservations.where(reservation_date: @reservation_date)
+  end
 
   def new
     @reservation = @bus.reservations.build
   end
-  # {"authenticity_token"=>"[FILTERED]", "bus"=>{"reservation_date"=>"2024-02-03", "seat_ids["=>{"]"=>"2"}}, "commit"=>"Submit", "bus_id"=>"4"}
-  # {"authenticity_token"=>"[FILTERED]", "bus"=>{"reservation_date"=>"2024-02-02"}, "seat_ids"=>["2", "17"], "commit"=>"Submit", "bus_id"=>"4"}
   def create
+    if params[:seat_ids].blank?
+      flash[:alert] = 'Please select at least one seat.'
+      redirect_back(fallback_location: root_path)
+      return
+    end
     reservation_date = params[:bus][:reservation_date]
     selected_seats = params[:seat_ids]
+    check = false
     selected_seats.each do |seat_id|
       @reservation = @bus.reservations.build(user_id:current_user.id, bus_id:params[:bus_id], seat_id: seat_id, reservation_date: reservation_date)
-      if @reservation.save
-        redirect_to @bus, notice: 'Reservation was successfully created.'
-        return 
-      else
-        render :new
+      check = @reservation.save
+      unless check 
+        render :new, alert: 'Reservation is not created'
+        return
       end
+    end
+    if check
+      redirect_to @bus, notice: 'Reservation was successfully created.'
+      return 
+    else
+      render :new, alert: 'Reservation is not created'
     end
   end
 
@@ -29,10 +45,13 @@ class ReservationsController < ApplicationController
 
     if @reservation
       @reservation.destroy
-      redirect_to customer_path, notice: "Booking successfully cancelled."
+      redirect_to customer_path, alert: "Booking successfully cancelled."
     else
       redirect_to customer_path, alert: "You can't cancel this reservation."
     end
+  end
+
+  def see_reservation
   end
 
   private

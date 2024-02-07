@@ -1,13 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<div class="bus-card" style="background-color: white;">
+ <p style="color: green"><%= notice %></p>
 
-<%= render @bus %>
+  <%= render @bus %>
 
-<div>
-  <%= link_to "Book Ticket", booking_bus_path(@bus) %>
-  <% if is_bus_owner? %>
-    <%= link_to "Edit this bus", edit_bus_path(@bus) %>
-  <% end %>
-  <%= link_to "Back to buses", buses_path %>
-
-  <%= button_to "Destroy this bus", @bus, method: :delete %>
+  <div>
+    <%= link_to "Book Ticket", booking_bus_path(@bus), class: "bt-primary" %>
+    <% if is_bus_owner? %>
+      <%= link_to "Edit this bus", edit_bus_path(@bus), class: "btn-secondary" %>
+    <% end %>
+    <%= link_to "Back to buses", buses_path, class: "btn-tertiary" %>
+    <% if is_bus_owner? %>
+      <%= button_to "Destroy this bus", @bus, method: :delete, data: { turbo_confirm: 'Are you sure you want to delete this bus?' }, class: "btn-destructive" %>
+    <% end %>
+    <% if if_bus_owner? %>
+      <p> See Reservation for this bus </p>
+      <%= render partial: 'reservations/seeReservation' %>
+    <% end %>
+  </div>
 </div>

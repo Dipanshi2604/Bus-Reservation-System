@@ -1,0 +1,27 @@
+<div class="section_our_solution">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="our_solution_category" >
+        <div class="solution_cards_box">
+          <div id="buses" style="display: grid; grid-template-columns: 1fr 1fr;" >
+            <% buses.each do |bus| %>
+                <div class="solution_card" >
+                  <div class="hover_color_bubble"></div>
+                  <div class="so_top_icon">
+                  </div>
+                  <div class="solu_title">
+                    <h3><%=bus.title%></h3>
+                  </div>
+                  <div class="solu_description">
+                    <p> <%= bus.source %> to <%= bus.destination %></p>
+                    <p> <%= bus.arrival_time %> to <%= bus.departure_time %></p>
+                    <%= link_to "See Details", bus, class: "details-btn" %>
+                  </div>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

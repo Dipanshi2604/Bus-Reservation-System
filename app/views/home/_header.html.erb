@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background: black;">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class=" active nav-link" aria-current="page" href="/" style="color: #FFC300;">Home</a>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item text">
+            <% if is_bus_owner? %>
+              <%= link_to "My Buses",bus_owner_path, class:"nav-link", style: "color: #FFC300;"%>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to "My Booking",customer_path, class:"nav-link",style: "color: #FFC300;"%>
+          </li>
+        <% end %>
+        <li class="nav-item">
+          <%= link_to "Edit Profile",edit_user_registration_path	, class:"nav-link", style: "color: #FFC300;" %>
+        </li>
+        <li class="nav-item">
+          <%= get_sign_in_or_sign_out_link(class: "nav-link", style: "color: #FFC300;")%>
+        </li>
+      </ul>
+      <%= form_with(url: search_bus_path, method: "get", local: true) do |form| %>
+        <%= puts current_user.user_type %>
+        <%= form.text_field :search, placeholder: "Enter route or title", class:"search-bar" %>
+        <%= form.submit "Search", class:"searchBar-b", style:"color: black;  
+        background-color:  #FFC300!important;
+        padding: 4px 10px;
+        border: none;
+        border-radius: 16px;
+        font-size: 0.8rem;" %>
+      <% end %>
+    </div>
+  </div>
+</nav>

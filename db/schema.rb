@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_02_060730) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_05_134758) do
   create_table "buses", force: :cascade do |t|
     t.string "title"
     t.integer "total_seats"
     t.string "source"
     t.string "destination"
-    t.datetime "arrival_time"
-    t.datetime "departure_time"
-    t.integer "registration_no"
+    t.time "arrival_time"
+    t.time "departure_time"
+    t.string "registration_no"
     t.integer "bus_owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

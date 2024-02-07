@@ -1,22 +1,22 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>My Booking</h1>
+<h1 class="align-center">My Booking</h1>
 
 <div id="buses">
   <% @my_bookings.each do |booking| %>
-    <strong>
-      <%= booking.bus.title %>
-    </strong>
-    <p> <%= "#{booking.bus.source} to #{booking.bus.destination}" %>
-    <span class="right-align"> <%= booking.bus.arrival_time %> </span><br>
-    <span class="right-align">
-      <%= link_to "Cancel", bus_reservation_path(booking.bus, booking),
-      method: :post,
-      data: { confirm: "Are you sure?", turbo_method: :delete },
-      class: "your-custom-class" %>
-    </span>
-    <strong> <%= "Seat no: #{booking.seat.seat_no}"%> </strong>
-    <hr>
+    <div class="booking-entry">
+      <div class="booking-details">
+        <strong><%= booking.bus.title %></strong>
+        <p><%= "#{booking.bus.source} to #{booking.bus.destination}" %></p>
+        <span><strong>at:</strong> <%= booking.bus.arrival_time %></span><br>
+        <span><strong>on:</strong> <%= booking.reservation_date %></span><br>
+        <strong><%= "Seat no: #{booking.seat.seat_no}"%></strong>
+      </div>
+
+      <div class="booking-actions">
+        <%= link_to "Cancel", bus_reservation_path(booking.bus, booking),
+            method: :post,
+            data: { confirm: "Are you sure?", turbo_method: :delete },
+            class: "your-custom-class" %>
+      </div>
+    </div>
   <% end %>
-  <hr>
 </div>

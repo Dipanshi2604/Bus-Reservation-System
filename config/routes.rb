@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     member do
       get 'booking', to: 'buses#book_ticket'
       get 'tickets', to: 'buses#show_ticket'
+      # get "see_reservation"=>"reservations#see_reservation"
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   get "/bus_owner"=> "bus_owner#index"
   get "/customer"=> "customer#index"
+  get "/search_bus"=> "buses#search_bus"
 
   devise_for :users, controllers: {
         sessions: 'users/sessions'

@@ -1,6 +1,6 @@
-<%= form_with(model: bus) do |form| %>
+<%= form_with(model: bus, class: "needs-validation", novalidate: true) do |form| %>
   <% if bus.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger" role="alert">
       <h2><%= pluralize(bus.errors.count, "error") %> prohibited this bus from being saved:</h2>
 
       <ul>
@@ -11,42 +11,43 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+  <% if bus.new_record? %> 
+    <div class="mb-3">
+      <%= form.label :total_seats, class: "form-label" %>
+      <%= form.number_field :total_seats, class: "form-control" %>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :source, class: "form-label" %>
+    <%= form.text_field :source, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :total_seats, style: "display: block" %>
-    <%= form.number_field :total_seats %>
+  <div class="mb-3">
+    <%= form.label :destination, class: "form-label" %>
+    <%= form.text_field :destination, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :source, style: "display: block" %>
-    <%= form.text_field :source %>
+  <div class="mb-3">
+    <%= form.label :arrival_time, class: "form-label" %>
+    <%= form.time_field :arrival_time, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :destination, style: "display: block" %>
-    <%= form.text_field :destination %>
+  <div class="mb-3">
+    <%= form.label :departure_time, class: "form-label" %>
+    <%= form.time_field :departure_time, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :arrival_time, style: "display: block" %>
-    <%= form.datetime_field :arrival_time %>
+  <div class="mb-3">
+    <%= form.label :registration_no, class: "form-label" %>
+    <%= form.text_field :registration_no, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :departure_time, style: "display: block" %>
-    <%= form.datetime_field :departure_time %>
-  </div>
-
-  <div>
-    <%= form.label :registration_no, style: "display: block" %>
-    <%= form.number_field :registration_no %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
