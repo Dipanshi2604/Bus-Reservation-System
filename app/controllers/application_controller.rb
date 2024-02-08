@@ -12,10 +12,10 @@ class ApplicationController < ActionController::Base
     return stored_location if stored_location
 
     if resource.is_a?(User)
-      if resource.has_user_type?('bus_owner')
-        bus_owner_path
-      elsif resource.has_user_type?('customer')
-        customer_path
+      if resource.bus_owner?
+        my_buses_path
+      elsif resource.customer?
+        user_bookings_path
       else
         root_path
       end

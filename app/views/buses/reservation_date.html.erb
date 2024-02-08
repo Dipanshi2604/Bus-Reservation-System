@@ -1,5 +1,5 @@
 
-<%= form_with(model: @reservation, url: tickets_bus_path(@bus, reservation_date: "dummy"), local: true, method: :get ,data: { action: 'submit->form#submitForm' }) do |form| %>
+<%= form_with(model: @reservation, url: available_seats_bus_path(@bus, reservation_date: "dummy"), local: true, method: :get ,data: { action: 'submit->form#submitForm' }) do |form| %>
   <div>
     <%= label_tag "reservation_date", "Reservation Date" %>
     <%= date_field_tag "reservation_date", Date.today, class: "datepicker", required: true , min: Date.today%>

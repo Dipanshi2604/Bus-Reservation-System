@@ -1,10 +1,9 @@
 <div class="bus-card" style="background-color: white;">
- <p style="color: green"><%= notice %></p>
 
   <%= render @bus %>
 
   <div>
-    <%= link_to "Book Ticket", booking_bus_path(@bus), class: "bt-primary" %>
+    <%= link_to "Book Ticket", reservation_date_bus_path(@bus), class: "bt-primary" %>
     <% if is_bus_owner? %>
       <%= link_to "Edit this bus", edit_bus_path(@bus), class: "btn-secondary" %>
     <% end %>

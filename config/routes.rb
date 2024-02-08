@@ -5,9 +5,8 @@ Rails.application.routes.draw do
   end
   resources :buses do
     member do
-      get 'booking', to: 'buses#book_ticket'
-      get 'tickets', to: 'buses#show_ticket'
-      # get "see_reservation"=>"reservations#see_reservation"
+      get 'reservation_date', to: 'buses#reservation_date'
+      get 'available_seats', to: 'buses#available_seats'
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -16,8 +15,8 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
   root to: "home#index"
-  get "/bus_owner"=> "bus_owner#index"
-  get "/customer"=> "customer#index"
+  get "/my_buses"=> "my_buses#index"
+  get "/user_bookings"=> "user_bookings#index"
   get "/search_bus"=> "buses#search_bus"
 
   devise_for :users, controllers: {

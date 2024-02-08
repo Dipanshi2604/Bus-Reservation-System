@@ -23,9 +23,9 @@ module ApplicationHelper
   def if_bus_owner?
     if current_user
       if current_user.user_type == "bus_owner"
-        link_to 'My Buses', bus_owner_path, class:"button"
+        link_to 'My Buses', my_buses_path, class:"button"
       else
-        link_to "My Bookings", customer_path, class: "button"
+        link_to "My Bookings", user_bookings_path, class: "button"
       end  
     end
   end

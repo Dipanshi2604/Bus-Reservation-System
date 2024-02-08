@@ -1,28 +1,26 @@
 class BusesController < ApplicationController
   before_action :authenticate_user!, except: %i[show index]
-  before_action :set_bus, only: %i[ show edit update destroy book_ticket show_ticket]
+  before_action :set_bus, only: %i[ show edit update destroy reservation_date available_seats]
 
   # GET /buses or /buses.json
   def index
     @buses = Bus.all
   end
 
-  def book_ticket
+  def reservation_date
     user_id = current_user.id
     bus_id = params[:bus_id] 
     @bus_seats = @bus.seats
-    @reservation = @bus.reservations
-    @reservation_seats = @reservation.pluck(:seat_id)
+    @reservation_seats = @bus.reservations.pluck(:seat_id)
   end 
   
-  def show_ticket
+  def available_seats
+    @reservation = Reservation.new()
     user_id = current_user.id
-    bus_id = params[:bus_id] 
-    # reservation_date = params[:reservation_date]
+    bus_id = params[:id] 
     @bus_seats = @bus.seats
-    @reservation = @bus.reservations.where(reservation_date: params[:reservation_date])
-    @reservation_seats = @reservation.pluck(:seat_id)
-    render 'show_ticket'
+    @reservation_seat_ids = @bus.reservations.where(reservation_date: params[:reservation_date]).pluck(:seat_id)  
+    render 'available_seats'
   end
 
   # GET /buses/1 or /buses/1.json

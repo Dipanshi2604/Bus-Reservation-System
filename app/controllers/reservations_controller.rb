@@ -12,31 +12,45 @@ class ReservationsController < ApplicationController
   def new
     @reservation = @bus.reservations.build
   end
+
   def create
-    if params[:seat_ids].blank?
+    reservation_date = reservation_params[:reservation_date]
+    selected_seats = reservation_params[:seat_ids].map(&:to_i) unless reservation_params[:seat_ids].blank?
+    @bus_reserved_ids = @bus.reservations.where(reservation_date: reservation_date).pluck(:seat_id)
+    
+    if selected_seats.blank?
       flash[:alert] = 'Please select at least one seat.'
       redirect_back(fallback_location: root_path)
       return
     end
-    reservation_date = params[:bus][:reservation_date]
-    selected_seats = params[:seat_ids]
-    check = false
-    selected_seats.each do |seat_id|
-      @reservation = @bus.reservations.build(user_id:current_user.id, bus_id:params[:bus_id], seat_id: seat_id, reservation_date: reservation_date)
-      check = @reservation.save
-      unless check 
-        render :new, alert: 'Reservation is not created'
+    # it is creating array of hashes (attributes)
+    reservations_attributes = selected_seats.map do |seat_id|
+      if @bus_reserved_ids.include?(seat_id)
+        flash[:alert] = "You can't book an already booked seat."
+        redirect_back(fallback_location: root_path)
         return
+      else
+        {
+          user_id: current_user.id,
+          bus_id: reservation_params[:bus_id],
+          seat_id: seat_id,
+          reservation_date: reservation_date
+        }
       end
     end
-    if check
-      redirect_to @bus, notice: 'Reservation was successfully created.'
-      return 
-    else
-      render :new, alert: 'Reservation is not created'
+    Reservation.transaction do
+      reservations = @bus.reservations.create(reservations_attributes)
+      # it is creating all reservation at once
+      if reservations.all?(&:persisted?)
+        redirect_to @bus, notice: 'Reservations were successfully created.'
+      else
+        flash[:alert] = 'Some reservations were not created.'
+        redirect_back(fallback_location: root_path)
+        raise ActiveRecord::Rollback # Rollback the transaction
+      end
     end
   end
-
+  
   def destroy
     bus_id = params[:bus_id]
     reservation_id = params[:id]
@@ -45,13 +59,10 @@ class ReservationsController < ApplicationController
 
     if @reservation
       @reservation.destroy
-      redirect_to customer_path, alert: "Booking successfully cancelled."
+      redirect_to user_bookings_path, alert: "Booking successfully cancelled."
     else
-      redirect_to customer_path, alert: "You can't cancel this reservation."
+      redirect_to user_bookings_path, alert: "You can't cancel this reservation."
     end
-  end
-
-  def see_reservation
   end
 
   private
@@ -61,9 +72,7 @@ class ReservationsController < ApplicationController
   # def set_reservation
   #   @reservation = @bus.reservations.find(params[:id])
   # end
-
   def reservation_params
-    params.require(:reservation).permit(:seat_number, :passenger_name)
-    # Add other permitted attributes
+    params.require(:reservation).permit(:bus_id, :reservation_date, seat_ids: [])
   end
 end
