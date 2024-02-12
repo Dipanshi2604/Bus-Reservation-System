@@ -1,11 +1,11 @@
 
 <h1 class="align-center">My Buses</h1>
 <% if user_signed_in? %>
-  <% if is_bus_owner? %>
+  <% if current_user.bus_owner? %>
     <%= link_to "New bus", new_bus_path , class:"button right-align"%>
   <% end %>
 <% end %>
 <br>
 <br>
 <br>
-<%= render partial: 'bus', locals: { buses: @owner_buses }%>
+<%= render partial: 'application/bus', locals: { buses: @owner_buses }%>

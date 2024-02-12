@@ -7,7 +7,7 @@
         </li>
         <% if user_signed_in? %>
           <li class="nav-item text">
-            <% if is_bus_owner? %>
+            <% if current_user.bus_owner? %>
               <%= link_to "My Buses",my_buses_path, class:"nav-link", style: "color: #FFC300;"%>
             <% end %>
           </li>
@@ -22,7 +22,7 @@
           <%= get_sign_in_or_sign_out_link(class: "nav-link", style: "color: #FFC300;")%>
         </li>
       </ul>
-      <%= form_with(url: search_bus_path, method: "get", local: true) do |form| %>
+      <%= form_with(url: search_bus_buses_path, method: "get", local: true) do |form| %>
         <%= form.text_field :search, placeholder: "Enter route or title", class:"search-bar" %>
         <%= form.submit "Search", class:"searchBar-b", style:"color: black;  
         background-color:  #FFC300!important;

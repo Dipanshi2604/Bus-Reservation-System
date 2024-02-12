@@ -195,3 +195,33 @@ def create
     return 
   end
 end
+
+
+
+# scope module: 'owner' do
+#   resources :buses, only: [] do
+#     resources :reservations, only: [:index]
+#   end
+# end
+# scope module: 'owner' do
+#   resources :buses, except: %i[show]
+#   resources :my_buses, only: [:index]
+# end
+
+# scope module: 'owner' do
+#   resources :buses do
+#     collection do
+#       get 'search_bus'
+#     end
+#     member do
+#       get 'reservation_date'
+#       get 'available_seats'
+#     end
+#   end
+# end
+# resources :buses do
+#   member do
+#     get 'reservation_date', to: 'buses#reservation_date'
+#     get 'available_seats', to: 'buses#available_seats'
+#   end
+# end

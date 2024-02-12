@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email,:name,:user_type, :mobile_no])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :name, :mobile_no])
   end
   
   def after_sign_in_path_for(resource)
@@ -13,9 +14,11 @@ class ApplicationController < ActionController::Base
 
     if resource.is_a?(User)
       if resource.bus_owner?
-        my_buses_path
+        #go to current bus owner's buses
+        my_buses_path   
       elsif resource.customer?
-        user_bookings_path
+        #go to current customer's bookings
+        user_bookings_path 
       else
         root_path
       end

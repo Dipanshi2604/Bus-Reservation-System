@@ -18,7 +18,6 @@ class Bus < ApplicationRecord
   def validate_destination?
     destination.present?
   end
-
   def create_seats
     # Create seats for the bus
     (1..total_seats).each do |seat_no|
