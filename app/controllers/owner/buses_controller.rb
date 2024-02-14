@@ -3,6 +3,12 @@ class Owner::BusesController < ApplicationController
   before_action :set_bus, only: %i[ edit update destroy]
   before_action :authorize_owner, only: [:edit, :update, :destroy]
 
+  def index
+    current_user_id = current_user.id
+    user = User.find(current_user_id)
+    @owner_buses = user.buses
+  end
+  
   # GET /buses/new
   def new
     @bus = current_user.buses.build

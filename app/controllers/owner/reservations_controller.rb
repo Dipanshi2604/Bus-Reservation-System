@@ -5,8 +5,12 @@ class Owner::ReservationsController < ApplicationController
 
   def index
     @bus = Bus.find(params[:bus_id])
-    @reservation_date = params[:reservation_date]
-    @bus_reservations = @bus.reservations.where(reservation_date: @reservation_date)
+    if params[:reservation_date].present?
+      @reservation_date = params[:reservation_date]
+      @bus_reservations = @bus.reservations.where(reservation_date: @reservation_date)
+    else
+      @bus_reservations = @bus.reservations
+    end
   end
 
   private

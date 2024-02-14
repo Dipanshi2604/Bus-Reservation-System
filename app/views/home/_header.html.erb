@@ -8,7 +8,7 @@
         <% if user_signed_in? %>
           <li class="nav-item text">
             <% if current_user.bus_owner? %>
-              <%= link_to "My Buses",my_buses_path, class:"nav-link", style: "color: #FFC300;"%>
+              <%= link_to "My Buses",buses_path, class:"nav-link", style: "color: #FFC300;"%>
             <% end %>
           </li>
           <li>

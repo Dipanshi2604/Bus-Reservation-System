@@ -1,7 +1,18 @@
 <div class="reservation-form">
-  <%= form_tag(bus_reservations_path(@bus), method: :get) do  %>
-    <%= label_tag "reservation_date", "Reservation Date:" %>
-    <%= date_field_tag "reservation_date", Date.today, required: true, min: Date.today %>
-    <%= submit_tag "See Reservation" %>
-  <% end %> 
+  <%= form_tag(bus_reservations_path(@bus), method: :get) do %>
+    <div>
+      <%= label_tag "show_reservations_for_date", "<i>Show Reservations for Specific Date</i>".html_safe %>
+      <%= radio_button_tag "show_reservations_for_date", "1", false, id: "show_reservations_for_date_yes" %>  
+      <%= label_tag "show_reservations_for_date_yes", "Yes" %>
+      <%= radio_button_tag "show_reservations_for_date", "0", true, id: "show_reservations_for_date_no" %>
+      <%= label_tag "show_reservations_for_date_no", "No)" %>
+    </div>
+
+    <div id="date_field_container" style="display: none;">
+      <%= label_tag "reservation_date", "Reservation Date" %>
+      <%= date_field_tag "reservation_date", nil, class: "datepicker" %>
+    </div>
+
+    <%= submit_tag "Submit" %>
+  <% end %>
 </div>

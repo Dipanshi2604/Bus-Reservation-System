@@ -11,8 +11,9 @@
     <% if ownes_bus? %>
       <%= button_to "Destroy this bus", @bus, method: :delete, data: { turbo_confirm: 'Are you sure you want to delete this bus?' }, class: "btn-destructive" %>
     <% end %>
-    <% if if_bus_owner? %>
-      <p> See Reservation for this bus </p>
+    <hr>
+    <% if is_bus_owner? %>
+      <strong> See Reservation for this bus </strong>
       <%= render partial: 'owner/reservations/seeReservation' %>
     <% end %>
   </div>

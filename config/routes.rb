@@ -10,22 +10,21 @@ Rails.application.routes.draw do
   get "/user_bookings"=> "user_bookings#index"
 
   scope module: 'owner' do
-    resources :buses, except: %i[show index]
-    resources :my_buses, only: [:index]
-    resources :reservations, only: [:index]
+    resources :buses, except: %i[show] do 
+      resources :reservations, only: [:index]
+    end
   end
 
-  resources :buses, only: %i[index show] do
+  resources :buses, only: [:show] do
     member do
       get 'reservation_date'
       get 'available_seats'
     end
+  
     collection do
       get 'search_bus'
     end
-  end
-
-  resources :buses, except: %i[edit new] do
+  
     resources :reservations, except: [:index]
   end
  
