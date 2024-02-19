@@ -2,7 +2,7 @@
 <h1 class="align-center">My Buses</h1>
 <% if user_signed_in? %>
   <% if current_user.bus_owner? %>
-    <%= link_to "New bus", new_bus_path , class:"button right-align"%>
+    <%= link_to "New bus", new_bus_path , class:"button right-align", data: { turbo_frame: "second_frame" }%>
   <% end %>
 <% end %>
 <br>
