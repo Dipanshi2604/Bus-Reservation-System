@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :reservations, foreign_key: 'user_id', class_name: 'Reservation', dependent: :destroy
 
   enum user_type: { bus_owner: 'bus_owner', customer: 'customer'}
+  validates :user_type, inclusion: { in: %w(customer bus_owner), message: "must be customer or bus_owner" }
   validates :name, :email,:mobile_no, presence: true
   validates :mobile_no, numericality: true
   validate :validate_mobile_no_length, if: :mobile_no?

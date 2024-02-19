@@ -48,7 +48,7 @@ class Owner::BusesController < ApplicationController
   # DELETE /buses/1 or /buses/1.json
   def destroy
     @bus.destroy!
-
+    
     respond_to do |format|
       format.html { redirect_to buses_url, notice: "Bus was successfully destroyed." }
       format.json { head :no_content }

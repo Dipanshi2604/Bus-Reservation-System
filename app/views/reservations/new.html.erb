@@ -1,7 +1,27 @@
-<%= form_tag(bus_reservations_path(@bus), method: :post) do %>
+<%= form_tag(new_bus_reservation_path(@bus), method: :get, id: "reservationForm") do %>
   <div>
     <%= label_tag "reservation_date", "Reservation Date" %>
-    <%= date_field_tag "reservation_date", nil, class: "datepicker" %>
+    <% default_date = params[:reservation_date].present? ? params[:reservation_date] : Date.today %>
+    <%= date_field_tag "reservation_date", default_date, class: "datepicker", id: "reservationDate", onchange: "submitForm()" %>
   </div>
-  <%= submit_tag "Submit" %>
+<% end %>
+
+<%= form_with(model: [@bus, @reservation], local: true) do |form|  %>
+  <div class="container">
+    <div class="seat-grid-container">
+      <% @bus_seats.each do |seat| %>
+        <% reserved_class = @reservation_seat_ids.include?(seat.id) ? "reserved" : "available" %>
+        <div class="seat <%= reserved_class %>">
+          <% options = { multiple: true } %>
+          <% options[:disabled] = true if @reservation_seat_ids.include?(seat.id) %>
+          <%= form.hidden_field :reservation_date, value: params[:reservation_date] %>
+          <%= form.check_box :seat_ids, { multiple: true, disabled: options[:disabled] }, seat.id, nil %>
+          <%= form.label :seat_ids, seat.seat_no %>
+        </div>
+      <% end %>
+    </div>
+    <div class="submit_tag">
+      <%= submit_tag "Submit" %>
+    </div>
+  </div>
 <% end %>

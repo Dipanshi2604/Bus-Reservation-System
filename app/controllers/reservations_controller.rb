@@ -3,7 +3,13 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @reservation = @bus.reservations.build
+    # @reservation = @bus.reservations.build
+    @reservation = Reservation.new()
+    if params[:reservation_date] == ""
+      params[:reservation_date] = Date.today
+    end
+    @bus_seats = @bus.seats
+    @reservation_seat_ids = @bus.reservations.where(reservation_date: params[:reservation_date]).pluck(:seat_id)  
   end
 
   def create

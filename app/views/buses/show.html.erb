@@ -3,7 +3,7 @@
   <%= render @bus %>
 
   <div>
-    <%= link_to "Book Ticket", reservation_date_bus_path(@bus), class: "bt-primary" %>
+    <%= link_to "Book Ticket", new_bus_reservation_path(@bus), class: "bt-primary" %>
     <% if ownes_bus? %>
       <%= link_to "Edit this bus", edit_bus_path(@bus), class: "btn-secondary" %>
     <% end %>
