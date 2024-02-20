@@ -1,21 +1,10 @@
 class BusesController < ApplicationController
   before_action :authenticate_user!, except: %i[show index]
-  before_action :set_bus, only: %i[reservation_date available_seats]
+
 
   # GET /buses or /buses.json
   def index
     @buses = Bus.all
-  end
-
-  def reservation_date
-    # rendering the from to select date for reservation
-  end 
-  
-  def available_seats
-    # showing available seat for new reservation on selected date from above fun
-    @reservation = Reservation.new()
-    @bus_seats = @bus.seats
-    @reservation_seat_ids = @bus.reservations.where(reservation_date: params[:reservation_date]).pluck(:seat_id)  
   end
 
   # GET /buses/1 or /buses/1.json
@@ -31,9 +20,8 @@ class BusesController < ApplicationController
 
   def search_bus
     if request.referer.present?
-
       # check from which page the request is coming from 
-      if request.referer.include?("http://localhost:3000/my_buses")
+      if request.referer.include?("http://localhost:3000/buses")
         @owner_buses = current_user.buses.where("source LIKE :search OR title LIKE :search OR destination LIKE :search", search: "%#{params[:search]}%")
         # Render bus owner's bus
         unless @owner_buses.empty?

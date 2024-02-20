@@ -3,7 +3,6 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    # @reservation = @bus.reservations.build
     @reservation = Reservation.new()
     if params[:reservation_date] == ""
       params[:reservation_date] = Date.today

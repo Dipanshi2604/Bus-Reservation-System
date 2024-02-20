@@ -2,6 +2,10 @@ class Bus < ApplicationRecord
   belongs_to :bus_owner, class_name: 'User'
   has_many :seats, dependent: :destroy
   has_many :reservations, dependent: :destroy
+
+  accepts_nested_attributes_for :reservations, allow_destroy: true
+  accepts_nested_attributes_for :seats, allow_destroy: true
+
   after_create :create_seats
   validates :title, :total_seats, :source, :destination,:arrival_time, :departure_time, :registration_no, presence: true
   validates :total_seats, numericality: { only_integer: true, greater_than: 0 }, if: :total_seats_present?

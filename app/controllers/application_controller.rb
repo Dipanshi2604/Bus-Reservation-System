@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(User)
       if resource.bus_owner?
         #go to current bus owner's buses
-        my_buses_path   
+        buses_path   
       elsif resource.customer?
         #go to current customer's bookings
         user_bookings_path 
