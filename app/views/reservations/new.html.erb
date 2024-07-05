@@ -4,24 +4,37 @@
     <% default_date = params[:reservation_date].present? ? params[:reservation_date] : Date.today %>
     <%= date_field_tag "reservation_date", default_date, class: "datepicker", id: "reservationDate", onchange: "submitForm()" %>
   </div>
+  <% submit_tag "Submit", class: "btn btn-primary" %>
 <% end %>
 
-<%= form_with(model: [@bus, @reservation], local: true) do |form|  %>
+<%= form_with(model: @bus, url: create_reservation_bus_reservations_path(@bus), method: :post, local: true) do |form| %>
   <div class="container">
     <div class="seat-grid-container">
-      <% @bus_seats.each do |seat| %>
-        <% reserved_class = @reservation_seat_ids.include?(seat.id) ? "reserved" : "available" %>
+      <%= form.fields_for :reservations do |rf| %>
+        <%= rf.hidden_field :reservation_date, value: params[:reservation_date].present? ? params[:reservation_date] : Date.today %>
+        <%= rf.hidden_field :bus_id, value: @bus.id%>
+        <%= rf.hidden_field :user_id, value: current_user.id%>
+
+        <% seat_id = rf.object.seat_id %>
+        <% seat_no = @bus_seats.select{|bs| bs.id == seat_id}.first.seat_no %>
+        <% reserved_class = @reservation_seat_ids.include?(seat_id) ? "reserved" : "available" %>
         <div class="seat <%= reserved_class %>">
           <% options = { multiple: true } %>
-          <% options[:disabled] = true if @reservation_seat_ids.include?(seat.id) %>
-          <%= form.hidden_field :reservation_date, value: params[:reservation_date] %>
-          <%= form.check_box :seat_ids, { multiple: true, disabled: options[:disabled] }, seat.id, nil %>
-          <%= form.label :seat_ids, seat.seat_no %>
+          <% options[:disabled] = true if @reservation_seat_ids.include?(seat_id) %>
+          <%= rf.check_box :seat_id, {disabled: options[:disabled], checked: rf.object.persisted? }, seat_id, nil %>
+          <%= form.label :seat_id, seat_no %>
         </div>
       <% end %>
     </div>
+
     <div class="submit_tag">
       <%= submit_tag "Submit" %>
     </div>
   </div>
 <% end %>
+
+<script>
+function submitForm() {
+    document.getElementById('reservationForm').submit();
+  }
+</script>

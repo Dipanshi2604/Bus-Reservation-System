@@ -25,7 +25,11 @@ Rails.application.routes.draw do
       get 'search_bus'
     end
   
-    resources :reservations, except: [:index]
+    resources :reservations, except: [:index] do 
+      collection do
+      post 'create_reservation' => "reservations#create_reservation"
+      end
+    end
   end
  
   devise_for :users, controllers: {

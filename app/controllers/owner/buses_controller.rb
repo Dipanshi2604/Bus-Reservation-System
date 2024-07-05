@@ -12,6 +12,8 @@ class Owner::BusesController < ApplicationController
   # GET /buses/new
   def new
     @bus = current_user.buses.build
+    @bus.seats.build
+    @bus.reservations.build
   end
 
   # GET /buses/1/edit
