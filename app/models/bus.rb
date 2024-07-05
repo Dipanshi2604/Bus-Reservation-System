@@ -2,9 +2,7 @@ class Bus < ApplicationRecord
   belongs_to :bus_owner, class_name: 'User'
   has_many :seats, dependent: :destroy
   has_many :reservations, dependent: :destroy
-
-  accepts_nested_attributes_for :reservations, allow_destroy: true
-  accepts_nested_attributes_for :seats, allow_destroy: true
+  accepts_nested_attributes_for :reservations, reject_if: proc { |obj| obj[:seat_id].blank? }
 
   after_create :create_seats
   validates :title, :total_seats, :source, :destination,:arrival_time, :departure_time, :registration_no, presence: true
